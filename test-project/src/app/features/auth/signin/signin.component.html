@@ -1,0 +1,19 @@
+<form [formGroup]="signInForm" class="border rounded p-10 shadow bg-white  w-[500px]">
+	<h2 class="mb-8 text-2xl">
+		Sign in
+	</h2>
+	<app-auth-input class="mb-2" [control]="signInForm.controls.email" label="Email"></app-auth-input>
+	<app-auth-input class="mb-2" [control]="signInForm.controls.password" label="Password"
+	                type="password"></app-auth-input>
+	<div *ngIf="error" class="border rounded bg-red-400 p-5 text-white">
+		{{error}}
+	</div>
+	<button [disabled]="!signInForm.valid" (click)="onSignIn()" class="w-full mt-5" mat-raised-button color="primary">
+		Sign Up
+	</button>
+	<div class="mt-4">
+		<span class="text-gray-500 text-sm">
+			Need an account? <br/> <a href="/auth/signup" class="underline">Sign up</a>
+		</span>
+	</div>
+</form>

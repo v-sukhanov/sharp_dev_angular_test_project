@@ -1,0 +1,18 @@
+<form [formGroup]="signUpForm" class="border rounded p-10 shadow bg-white  w-[500px]">
+	<h2 class="mb-8 text-2xl">
+		Sign up
+	</h2>
+	<app-auth-input class="mb-2" [control]="signUpForm.controls.email" label="Email"></app-auth-input>
+	<app-auth-input class="mb-2" [control]="signUpForm.controls.name" label="Name"></app-auth-input>
+	<app-auth-input class="mb-2" [control]="signUpForm.controls.password" label="Password" type="password"></app-auth-input>
+	<app-auth-input [control]="signUpForm.controls.confirmPassword" label="Confirm Password" type="password"></app-auth-input>
+	<div *ngIf="error" class="border rounded bg-red-400 p-5 text-white">
+		{{error}}
+	</div>
+	<button [disabled]="!signUpForm.valid" (click)="onSignUp()" class="w-full mt-5" mat-raised-button color="primary">Sign In</button>
+	<div class="mt-4">
+		<span class="text-gray-500 text-sm">
+			Already have an account? <br/> <a href="/auth/signin" class="underline">Sign in</a>
+		</span>
+	</div>
+</form>

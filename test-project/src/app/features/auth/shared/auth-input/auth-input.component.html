@@ -1,0 +1,10 @@
+<mat-form-field class="w-full" appearance="fill">
+	<mat-label>{{label}}</mat-label>
+	<input [formControl]="control" matInput [type]="type === 'password' ? (hide ? 'password' : 'text') : 'text'">
+	<button *ngIf="type === 'password'" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+		<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+	</button>
+	<mat-error *ngIf="control.errors">
+		Not valid
+	</mat-error>
+</mat-form-field>
