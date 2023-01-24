@@ -1,11 +1,27 @@
 <div class="relative">
-	<div class="fixed bg-blue-500 text-white w-full p-5" fxLayout="row" fxLayoutAlign="space-between center">
+	<div class="bg-blue-500 text-white w-full p-5" fxLayout="row" fxLayoutAlign="space-between center">
 		<div fxLayout="row" fxLayoutGap="15px">
-			<a href="">Transactions</a>
-			<a href="">Create Transaction</a>
+			<a href="main/transactions">Transactions</a>
+			<a href="main/newTransaction">New Transaction</a>
 		</div>
-		<div>
+		<div fxLayout="row" fxLayoutAlign="default center" fxLayoutGap="25px">
+			<div>
+				<span>
+					Balance:
+				</span>
+				<span class="font-bold">
+					{{(userInfo$ | async)?.balance}} PW
+				</span>
+			</div>
+			<div>
+				<span>
+					{{(userInfo$ | async)?.name}}
+				</span>
+			</div>
 			<mat-icon (click)="logout()" class="cursor-pointer">exit_to_app</mat-icon>
 		</div>
+	</div>
+	<div class="mt-10 flex justify-center">
+		<router-outlet></router-outlet>
 	</div>
 </div>

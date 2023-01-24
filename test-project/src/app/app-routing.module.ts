@@ -4,9 +4,9 @@ import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
 	{
-		path: '',
+		path: 'main',
 		loadChildren: () => import('./features/template/template.routes').then(x => x.templateRoutes),
-		canActivate: [AuthGuard]
+		canActivate: [AuthGuard],
 	},
 	{
 		path: 'auth',

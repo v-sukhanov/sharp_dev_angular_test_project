@@ -6,19 +6,19 @@ export const templateRoutes: Routes = [
 	{
 		path: '',
 		component: TemplateComponent,
-		// children: [
-		// 	{
-		// 		path: 'signin',
-		// 		component: SigninComponent
-		// 	},
-		// 	{
-		// 		path: 'signup',
-		// 		component: SignupComponent
-		// 	},
-		// 	{
-		// 		path: '**',
-		// 		redirectTo: 'signin'
-		// 	}
-		// ]
+		children: [
+			{
+				path: 'transactions',
+				loadComponent: () => import('../transactions/transactions.component').then(x => x.TransactionsComponent)
+			},
+			{
+				path: 'newTransaction',
+				loadComponent: () => import('../new-transaction/new-transaction.component').then(x => x.NewTransactionComponent)
+			},
+			{
+				path: '**',
+				redirectTo: 'newTransaction'
+			}
+		]
 	}
 ];

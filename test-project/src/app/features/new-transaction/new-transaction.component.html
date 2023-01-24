@@ -1,0 +1,29 @@
+<div class="w-full md:w-full lg:w-[600px]">
+	<h2 class="mb-10">
+		Please select a user for the transaction
+	</h2>
+	<app-new-transaction-autocomplete (selectUser)="selectedUser$.next($event)"></app-new-transaction-autocomplete>
+	<div class="mt-[10px]" *ngIf="selectedUser$ | async">
+		<div>
+			<span class="opacity-50 text-2xl">
+				recipient:
+			</span>
+			<span class="text-2xl">
+				{{(selectedUser$ | async)}}
+			</span>
+		</div>
+		<div class="mt-[10px]">
+			<mat-form-field class="w-full" appearance="fill">
+				<mat-label>PW amount</mat-label>
+				<input [(ngModel)]="value" matInput type="number">
+			</mat-form-field>
+			<div *ngIf="((balance$ | async) ?? 0) < value" class="border rounded p-5 bg-red-400 text-white">
+				The transaction amount is greater than your balance
+			</div>
+		</div>
+		<button [disabled]="((balance$ | async) ?? 0) < value || !value" (click)="createTransaction()" class="w-full mt-5" mat-raised-button color="primary">
+			Send
+		</button>
+
+	</div>
+</div>

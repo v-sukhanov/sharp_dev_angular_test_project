@@ -1,8 +1,7 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
-import { LoginAction, LogoutAction, SignUpAction } from './auth.actions';
-import { ISignUpActionPayload } from './auth.models';
+import {  LoginAction, LogoutAction, SignUpAction } from './auth.actions';
 import { tap } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -15,7 +14,7 @@ export interface IAuthStateModel {
 @State<IAuthStateModel>({
 	name: 'auth',
 	defaults: {
-		token: null,
+		token: null
 	}
 })
 @Injectable()
@@ -31,6 +30,8 @@ export class AuthState {
 		private _router: Router
 	) {}
 
+
+
 	@Action(LoginAction)
 	login(ctx: StateContext<IAuthStateModel>, action: LoginAction) {
 		return this._authService.signIn(action.payload)
@@ -39,7 +40,7 @@ export class AuthState {
 					ctx.patchState({
 						token: response.id_token,
 					});
-					this._router.navigate([''])
+					this._router.navigate(['/main'])
 				})
 			)
 	}
@@ -52,7 +53,7 @@ export class AuthState {
 					ctx.patchState({
 						token: response.id_token,
 					});
-					this._router.navigate([''])
+					this._router.navigate(['/main'])
 				})
 			)
 	}

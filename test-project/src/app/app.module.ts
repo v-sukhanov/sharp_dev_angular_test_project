@@ -7,7 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxsModule } from '@ngxs/store';
 import { AuthState } from './store/auth/auth.state';
 import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { UserState } from './store/user/user.state';
+import { HttpHeaderInterceptor } from './core/interceptors/http-header.interceptor';
 
 @NgModule({
 	declarations: [
@@ -18,12 +20,21 @@ import { HttpClientModule } from '@angular/common/http';
 		AppRoutingModule,
 		HttpClientModule,
 		BrowserAnimationsModule,
-		NgxsModule.forRoot([AuthState]),
+		NgxsModule.forRoot([
+			AuthState,
+			UserState
+		]),
 		NgxsStoragePluginModule.forRoot({
 			key: 'auth.token'
 		})
 	],
-	providers: [],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: HttpHeaderInterceptor,
+			multi: true
+		}
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule {
